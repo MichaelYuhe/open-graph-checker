@@ -13,6 +13,7 @@ import {
 const Popup = () => {
   const [url, setUrl] = useState("");
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -21,9 +22,16 @@ const Popup = () => {
   }, []);
 
   useEffect(() => {
-    getOG().then((res) => {
-      if (res) setOpenGraph(res);
-    });
+    if (!url) return;
+
+    setIsLoading(true);
+    getOG()
+      .then((res) => {
+        if (res) setOpenGraph(res);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [url]);
 
   async function getOG(): Promise<OpenGraph | null> {
@@ -36,7 +44,11 @@ const Popup = () => {
 
   return (
     <div className="p-4 w-[26rem] h-96 overflow-y-auto flex flex-col items-center">
-      {openGraph && (
+      <h1 className="text-xl font-bold">Open Graph Checker</h1>
+
+      {isLoading && <p className="text-lg">Loading...</p>}
+
+      {!isLoading && openGraph && (
         <div className="flex flex-col gap-y-4 w-full">
           <div className="flex flex-col gap-y-2 w-full">
             <h2 className="font-semibold text-lg">Twitter:</h2>

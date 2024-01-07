@@ -1,4 +1,5 @@
 import { OpenGraph } from "../type";
+import { simplifyURL } from "../util";
 
 export function TwitterCard(twitter: OpenGraph["twitter"]) {
   if (twitter.card === "summary_large_image")
@@ -10,7 +11,9 @@ export function TwitterCard(twitter: OpenGraph["twitter"]) {
           alt={twitter.title}
         />
 
-        <span className="absolute left-4 bottom-4">{twitter.url}</span>
+        <span className="absolute text-white left-4 bottom-4">
+          {simplifyURL(twitter.url)}
+        </span>
       </div>
     );
 

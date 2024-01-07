@@ -69,3 +69,8 @@ export function parseOpenGraph(htmlText: string): OpenGraph {
     },
   };
 }
+
+export function simplifyURL(url: string): string {
+  const urlObj = new URL(url);
+  return urlObj.hostname;
+}
