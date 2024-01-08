@@ -1,8 +1,8 @@
-# Chrome Extension Starter
+# Open Graph Checker
 
-Chrome extension starter template with React, TypeScript, Vite and Tailwind.
+Check your site's open graph meta tags at ease.
 
-Built from [Chrome Extension Starter](https://github.com/chibat/chrome-extension-typescript-starter)
+[Download in Chrome Web Store](https://chromewebstore.google.com/detail/open-graph-checker/oaidiikhhnkckmbgncnmgpbldfemeokf)
 
 ## Development
 
