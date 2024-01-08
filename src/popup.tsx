@@ -11,30 +11,26 @@ import {
 } from "./components/OpenGraphCard";
 
 const Popup = () => {
-  const [url, setUrl] = useState("");
   const [openGraph, setOpenGraph] = useState<OpenGraph | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      setUrl(tabs[0].url!);
+      const url = tabs[0].url;
+      if (!url) return;
+
+      setIsLoading(true);
+      getOG(url)
+        .then((res) => {
+          if (res) setOpenGraph(res);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     });
   }, []);
 
-  useEffect(() => {
-    if (!url) return;
-
-    setIsLoading(true);
-    getOG()
-      .then((res) => {
-        if (res) setOpenGraph(res);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [url]);
-
-  async function getOG(): Promise<OpenGraph | null> {
+  async function getOG(url: string): Promise<OpenGraph | null> {
     const fetchRes = await fetch(url);
     if (!fetchRes.ok) return null;
 
