@@ -11,7 +11,6 @@ export default defineConfig({
         popup: resolve(__dirname, "popup.html"),
         options: resolve(__dirname, "options.html"),
         service_worker: resolve(__dirname, "src/background.ts"),
-        content_script: resolve(__dirname, "src/content-script.ts"),
       },
       output: {
         chunkFileNames: "[name].[hash].js",

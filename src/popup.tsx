@@ -39,7 +39,7 @@ const Popup = () => {
   }
 
   return (
-    <div className="p-4 w-[26rem] h-96 overflow-y-auto flex flex-col items-center">
+    <div className="p-6 w-[28rem] h-96 overflow-y-auto flex flex-col items-center">
       <h1 className="text-xl font-bold">Open Graph Checker</h1>
 
       {isLoading && <p className="text-lg">Loading...</p>}
